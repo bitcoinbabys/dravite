@@ -994,10 +994,10 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 		nSubsidy = 0.15625 * COIN;
 	} else if (pindexBest->nHeight+1 > 250000 && pindexBest->nHeight+1 <= 500000) {
 		nSubsidy =  0.078125 * COIN;
-	} else if (pindexBest->nHeight+1 > 500000 && pindexBest->nHeight+1 <= 1000000) {
-		nSubsidy = 0.0390625 * COIN;
+	} else if (pindexBest->nHeight+1 > 500000 && pindexBest->nHeight+1 <= 600000) {
+		nSubsidy = 16650 * COIN;
 	} else {
-		nSubsidy = 0.01953125 * COIN;
+		nSubsidy = 8325 * COIN;
 	}
 
 	LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
@@ -1010,8 +1010,13 @@ uint64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, uint64_t nCoinAge,
 {
 	uint64_t nSubsidy;
 
-	nSubsidy = nCoinAge * GetCoinYearReward(pindexPrev->nHeight) * 33 / (365 * 33 + 8);
-
+	if (pindexBest->nHeight+1 <= 500000) {
+		nSubsidy = nCoinAge * GetCoinYearReward(pindexPrev->nHeight) * 33 / (365 * 33 + 8);
+	} else if (pindexBest->nHeight+1 > 500000 && pindexBest->nHeight+1 <= 600000) {
+		nSubsidy = 20625 * COIN;
+	} else {
+		nSubsidy = 10315 * COIN;
+	}
 	LogPrint("creation", "GetProofOfStakeReward(): coinYearReward=%d create=%s nCoinAge=%d\n", GetCoinYearReward(pindexPrev->nHeight), FormatMoney(nSubsidy), nCoinAge);
 
 	return nSubsidy + nFees;
@@ -2946,7 +2951,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 		CAddress addrFrom;
 		uint64_t nNonce = 0;
 		vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-		if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+		if (pfrom->nVersion < (pindexBest->nHeight < 497500 ? MIN_PROTO_VERSION : MIN_PROTO_VERSION_FORK)) // Reward changes at block 500k
 		{
 			// disconnect from peers older than this proto version
 			LogPrintf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString(), pfrom->nVersion);
