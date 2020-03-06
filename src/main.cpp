@@ -974,29 +974,27 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 	int64_t nSubsidy = 1 * COIN;
 
 	// Premine (10M)
-	if(pindexBest->nHeight+1 == 1) {
+	if (pindexBest->nHeight+1 == 1) {
 		nSubsidy = 10000000 * COIN;
 	} else if (pindexBest->nHeight+1 > 1 && pindexBest->nHeight+1 <= 1500) {
 		nSubsidy = 0 * COIN;
-	} else if (pindexBest->nHeight+1 > 50 && pindexBest->nHeight+1 <= 10000) {
+	} else if (pindexBest->nHeight+1 > 1500 && pindexBest->nHeight+1 <= 10000) {
 		nSubsidy = 10 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 25000) {
+	} else if (pindexBest->nHeight+1 > 10000 && pindexBest->nHeight+1 <= 25000) {
 		nSubsidy = 5 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 35000) {
+	} else if (pindexBest->nHeight+1 > 25000 && pindexBest->nHeight+1 <= 35000) {
 		nSubsidy = 2.5 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 50000) {
+	} else if (pindexBest->nHeight+1 > 35000 && pindexBest->nHeight+1 <= 50000) {
 		nSubsidy = 1.25 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 75000) {
+	} else if (pindexBest->nHeight+1 > 50000 && pindexBest->nHeight+1 <= 75000) {
 		nSubsidy = 0.625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 100000) {
+	} else if (pindexBest->nHeight+1 > 75000 && pindexBest->nHeight+1 <= 100000) {
 		nSubsidy = 0.3125 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 250000) {
+	} else if (pindexBest->nHeight+1 > 100000 && pindexBest->nHeight+1 <= 250000) {
 		nSubsidy = 0.15625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 500000) {
+	} else if (pindexBest->nHeight+1 > 250000 && pindexBest->nHeight+1 <= 500000) {
 		nSubsidy =  0.078125 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 75000) {
-		nSubsidy = 0.625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 1000000) {
+	} else if (pindexBest->nHeight+1 > 500000 && pindexBest->nHeight+1 <= 1000000) {
 		nSubsidy = 0.0390625 * COIN;
 	} else {
 		nSubsidy = 0.01953125 * COIN;
