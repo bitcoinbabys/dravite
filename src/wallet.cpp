@@ -1716,7 +1716,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 const CBlockIndex* pIndex0 = GetLastBlockIndex(pindexBest, false);
                 if (!txNew.GetCoinAge(txdb, pindexBest, nCoinAge))
                     return error("CreateCoinStake : failed to calculate coin age");
-                uint64_t nTotalSize = pcoin.first->vout[pcoin.second].nValue + GetProofOfStakeReward(pIndex0, nCoinAge, nFees);
+//                uint64_t nTotalSize = pcoin.first->vout[pcoin.second].nValue + GetProofOfStakeReward(pIndex0, nCoinAge, nFees);
 
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
                 fKernelFound = true;
